@@ -1,4 +1,4 @@
-# Anagha Bande — Professional Portfolio
+# Anagha Bande - Professional Portfolio
 
 A responsive, dependency-free portfolio focused on operations, supply chain, analytics, and global strategy.
 
