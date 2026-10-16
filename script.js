@@ -8,30 +8,24 @@ const closeNavigation = () => {
   if (!nav || !navToggle) return;
   nav.classList.remove("is-open");
   navToggle.setAttribute("aria-expanded", "false");
-  navToggle.querySelector(".sr-only").textContent = "Open navigation";
   document.body.classList.remove("nav-open");
 };
 
 if (nav && navToggle) {
   navToggle.addEventListener("click", () => {
-    const isOpen = navToggle.getAttribute("aria-expanded") === "true";
-    nav.classList.toggle("is-open", !isOpen);
-    navToggle.setAttribute("aria-expanded", String(!isOpen));
-    navToggle.querySelector(".sr-only").textContent = isOpen ? "Open navigation" : "Close navigation";
-    document.body.classList.toggle("nav-open", !isOpen);
+    const isOpening = navToggle.getAttribute("aria-expanded") !== "true";
+    nav.classList.toggle("is-open", isOpening);
+    navToggle.setAttribute("aria-expanded", String(isOpening));
+    document.body.classList.toggle("nav-open", isOpening);
   });
-
   navLinks.forEach((link) => link.addEventListener("click", closeNavigation));
-
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeNavigation();
-      navToggle.focus();
-    }
+    if (event.key !== "Escape") return;
+    closeNavigation();
+    navToggle.focus();
   });
-
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 860) closeNavigation();
+    if (window.innerWidth > 980) closeNavigation();
   });
 }
 
@@ -46,13 +40,12 @@ if (reduceMotion || !("IntersectionObserver" in window)) {
   const revealObserver = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
       });
     },
-    { threshold: 0.12, rootMargin: "0px 0px -36px" },
+    { threshold: 0.1, rootMargin: "0px 0px -28px" },
   );
   revealItems.forEach((item) => revealObserver.observe(item));
 }
@@ -64,52 +57,34 @@ const observedSections = navLinks
 if ("IntersectionObserver" in window) {
   const sectionObserver = new IntersectionObserver(
     (entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-      if (!visible) return;
+      const current = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!current) return;
       navLinks.forEach((link) => {
-        const isCurrent = link.getAttribute("href") === `#${visible.target.id}`;
-        if (isCurrent) link.setAttribute("aria-current", "true");
+        if (link.getAttribute("href") === `#${current.target.id}`) link.setAttribute("aria-current", "true");
         else link.removeAttribute("aria-current");
       });
     },
-    { rootMargin: "-20% 0px -65%", threshold: [0, 0.2, 0.5] },
+    { rootMargin: "-20% 0px -68%", threshold: [0, 0.15, 0.4] },
   );
   observedSections.forEach((section) => sectionObserver.observe(section));
 }
 
-const careerTabs = [...document.querySelectorAll("[data-career-tab]")];
-const careerPanels = [...document.querySelectorAll("[data-career-panel]")];
+const projectFilters = [...document.querySelectorAll("[data-project-filter]")];
+const projectCards = [...document.querySelectorAll("[data-project-category]")];
 
-const selectCareerMilestone = (key, shouldFocus = false) => {
-  careerTabs.forEach((tab) => {
-    const isActive = tab.dataset.careerTab === key;
-    tab.classList.toggle("is-active", isActive);
-    tab.setAttribute("aria-pressed", String(isActive));
-    if (isActive && shouldFocus) tab.focus();
-  });
-
-  careerPanels.forEach((panel) => {
-    panel.hidden = panel.dataset.careerPanel !== key;
-  });
-};
-
-careerTabs.forEach((tab, index) => {
-  tab.addEventListener("click", () => selectCareerMilestone(tab.dataset.careerTab));
-  tab.addEventListener("mouseenter", () => selectCareerMilestone(tab.dataset.careerTab));
-  tab.addEventListener("focus", () => selectCareerMilestone(tab.dataset.careerTab));
-  tab.addEventListener("keydown", (event) => {
-    if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
-    event.preventDefault();
-    const direction = ["ArrowRight", "ArrowDown"].includes(event.key) ? 1 : -1;
-    const nextIndex = (index + direction + careerTabs.length) % careerTabs.length;
-    selectCareerMilestone(careerTabs[nextIndex].dataset.careerTab, true);
+projectFilters.forEach((button) => {
+  button.addEventListener("click", () => {
+    const filter = button.dataset.projectFilter;
+    projectFilters.forEach((item) => item.classList.toggle("is-active", item === button));
+    projectCards.forEach((card) => {
+      const categories = card.dataset.projectCategory.split(" ");
+      const visible = filter === "all" || categories.includes(filter);
+      card.classList.toggle("is-filtered", !visible);
+      if (!visible) card.open = false;
+    });
   });
 });
 
-const projectCards = [...document.querySelectorAll(".project-card")];
 projectCards.forEach((card) => {
   card.addEventListener("toggle", () => {
     if (!card.open) return;
@@ -119,31 +94,61 @@ projectCards.forEach((card) => {
   });
 });
 
+const translationNodes = [...document.querySelectorAll("[data-i18n]")];
+const translatedAltNodes = [...document.querySelectorAll("[data-i18n-alt]")];
+const originalContent = new Map(translationNodes.map((node) => [node.dataset.i18n, node.innerHTML]));
+const originalAlt = new Map(translatedAltNodes.map((node) => [node.dataset.i18nAlt, node.getAttribute("alt")]));
+const languageSelect = document.querySelector("[data-language-select]");
+const translations = window.portfolioTranslations || {};
+
+const getNestedValue = (object, path) => path.split(".").reduce((value, key) => value?.[key], object);
+
+const applyLanguage = (language) => {
+  const dictionary = translations[language];
+  translationNodes.forEach((node) => {
+    const key = node.dataset.i18n;
+    const value = language === "en" ? originalContent.get(key) : getNestedValue(dictionary, key);
+    node.innerHTML = value ?? originalContent.get(key);
+  });
+  translatedAltNodes.forEach((node) => {
+    const key = node.dataset.i18nAlt;
+    const value = language === "en" ? originalAlt.get(key) : getNestedValue(dictionary, key);
+    node.setAttribute("alt", value ?? originalAlt.get(key));
+  });
+
+  document.documentElement.lang = language;
+  document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+  if (languageSelect) languageSelect.value = language;
+  closeNavigation();
+
+  try { window.localStorage.setItem("portfolio-language", language); } catch { /* Storage can be unavailable on local files. */ }
+  window.dispatchEvent(new CustomEvent("portfolio-language-change", { detail: { language } }));
+};
+
+if (languageSelect) {
+  let savedLanguage = "en";
+  try { savedLanguage = window.localStorage.getItem("portfolio-language") || "en"; } catch { /* Use English fallback. */ }
+  if (![...languageSelect.options].some((option) => option.value === savedLanguage)) savedLanguage = "en";
+  applyLanguage(savedLanguage);
+  languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
+}
+
 const canvas = document.querySelector("#skill-canvas");
 const cursorGlow = document.querySelector("[data-cursor-glow]");
 
 if (canvas) {
   const context = canvas.getContext("2d");
-  const allSkills = [
-    "OPERATIONS",
-    "SUPPLY CHAIN",
-    "ANALYTICS",
-    "GLOBAL STRATEGY",
-    "PROCESS IMPROVEMENT",
-    "QUALITY",
-    "COMPLIANCE",
-    "PROCUREMENT",
-    "KPI MONITORING",
-    "EXCEL",
-    "POWER BI",
-    "TABLEAU",
-    "PYTHON",
-    "SALESFORCE",
-    "SPSS",
-    "LINGO",
-    "MARKET ANALYSIS",
-    "PROGRAM OPERATIONS",
-  ];
+  const skillSets = {
+    en: ["OPERATIONS", "SUPPLY CHAIN", "ANALYTICS", "GLOBAL STRATEGY", "OPTIMIZATION", "QUALITY", "COMPLIANCE", "PROCUREMENT", "FORECASTING", "LEADERSHIP", "EXCEL", "POWER BI", "TABLEAU", "SPSS", "LINGO", "RESEARCH"],
+    hi: ["संचालन", "आपूर्ति शृंखला", "विश्लेषण", "वैश्विक रणनीति", "अनुकूलन", "गुणवत्ता", "अनुपालन", "खरीद", "पूर्वानुमान", "नेतृत्व"],
+    fr: ["OPÉRATIONS", "LOGISTIQUE", "ANALYSE", "STRATÉGIE", "OPTIMISATION", "QUALITÉ", "CONFORMITÉ", "ACHATS", "PRÉVISION", "LEADERSHIP"],
+    mr: ["कार्यसंचालन", "पुरवठा साखळी", "विश्लेषण", "जागतिक धोरण", "ऑप्टिमायझेशन", "गुणवत्ता", "अनुपालन", "खरेदी", "अंदाज", "नेतृत्व"],
+    es: ["OPERACIONES", "SUMINISTRO", "ANALÍTICA", "ESTRATEGIA", "OPTIMIZACIÓN", "CALIDAD", "CUMPLIMIENTO", "COMPRAS", "PRONÓSTICO", "LIDERAZGO"],
+    ar: ["العمليات", "سلسلة الإمداد", "التحليلات", "الاستراتيجية", "التحسين", "الجودة", "الامتثال", "المشتريات", "التنبؤ", "القيادة"],
+    pt: ["OPERAÇÕES", "SUPRIMENTOS", "ANÁLISE", "ESTRATÉGIA", "OTIMIZAÇÃO", "QUALIDADE", "CONFORMIDADE", "COMPRAS", "PREVISÃO", "LIDERANÇA"],
+    de: ["BETRIEB", "LIEFERKETTE", "ANALYTIK", "STRATEGIE", "OPTIMIERUNG", "QUALITÄT", "COMPLIANCE", "BESCHAFFUNG", "PROGNOSE", "FÜHRUNG"],
+    ja: ["オペレーション", "サプライチェーン", "分析", "グローバル戦略", "最適化", "品質", "コンプライアンス", "調達", "予測", "リーダーシップ"],
+  };
   const pointer = { x: -1000, y: -1000, active: false };
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   let viewportWidth = window.innerWidth;
@@ -151,16 +156,18 @@ if (canvas) {
   let floatingSkills = [];
   let animationFrame = null;
   let resizeTimer = null;
+  let activeLanguage = document.documentElement.lang || "en";
 
   const createFloatingSkills = () => {
-    const count = viewportWidth < 700 ? 10 : allSkills.length;
-    floatingSkills = allSkills.slice(0, count).map((label, index) => ({
+    const source = skillSets[activeLanguage] || skillSets.en;
+    const count = viewportWidth < 700 ? Math.min(8, source.length) : Math.min(16, source.length);
+    floatingSkills = source.slice(0, count).map((label, index) => ({
       label,
-      x: ((index * 0.618033 + 0.11) % 1) * viewportWidth,
-      y: ((index * 0.381966 + 0.17) % 1) * viewportHeight,
-      vx: (Math.random() - 0.5) * 0.16,
-      vy: (Math.random() - 0.5) * 0.13,
-      size: 9 + (index % 4) * 1.5,
+      x: ((index * 0.618033 + 0.09) % 1) * viewportWidth,
+      y: ((index * 0.381966 + 0.15) % 1) * viewportHeight,
+      vx: (Math.random() - 0.5) * 0.14,
+      vy: (Math.random() - 0.5) * 0.12,
+      size: 9 + (index % 4) * 1.4,
       phase: Math.random() * Math.PI * 2,
     }));
   };
@@ -168,12 +175,12 @@ if (canvas) {
   const resizeCanvas = () => {
     viewportWidth = window.innerWidth;
     viewportHeight = window.innerHeight;
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.round(viewportWidth * pixelRatio);
-    canvas.height = Math.round(viewportHeight * pixelRatio);
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(viewportWidth * ratio);
+    canvas.height = Math.round(viewportHeight * ratio);
     canvas.style.width = `${viewportWidth}px`;
     canvas.style.height = `${viewportHeight}px`;
-    context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
     createFloatingSkills();
   };
 
@@ -183,109 +190,82 @@ if (canvas) {
         const dx = floatingSkills[first].x - floatingSkills[second].x;
         const dy = floatingSkills[first].y - floatingSkills[second].y;
         const distance = Math.hypot(dx, dy);
-        if (distance > 165) continue;
-        const alpha = (1 - distance / 165) * 0.035;
+        if (distance > 170) continue;
         context.beginPath();
         context.moveTo(floatingSkills[first].x, floatingSkills[first].y);
         context.lineTo(floatingSkills[second].x, floatingSkills[second].y);
-        context.strokeStyle = `rgba(226, 194, 117, ${alpha})`;
+        context.strokeStyle = `rgba(237, 200, 115, ${(1 - distance / 170) * 0.04})`;
         context.lineWidth = 0.7;
         context.stroke();
       }
     }
   };
 
-  const drawFrame = (shouldAnimate = true) => {
+  const drawFrame = (animate = true) => {
     context.clearRect(0, 0, viewportWidth, viewportHeight);
     drawConnections();
-
     floatingSkills.forEach((skill, index) => {
       const dx = skill.x - pointer.x;
       const dy = skill.y - pointer.y;
       const distance = Math.hypot(dx, dy);
-      const proximity = pointer.active ? Math.max(0, 1 - distance / 190) : 0;
-
-      if (shouldAnimate) {
-        skill.vx += Math.sin(performance.now() * 0.00025 + skill.phase) * 0.0015;
-        skill.vy += Math.cos(performance.now() * 0.0002 + skill.phase) * 0.0012;
-
+      const proximity = pointer.active ? Math.max(0, 1 - distance / 200) : 0;
+      if (animate) {
+        skill.vx += Math.sin(performance.now() * 0.00024 + skill.phase) * 0.0014;
+        skill.vy += Math.cos(performance.now() * 0.00021 + skill.phase) * 0.0011;
         if (proximity > 0 && distance > 0) {
-          const force = proximity * 0.075;
+          const force = proximity * 0.07;
           skill.vx += (dx / distance) * force;
           skill.vy += (dy / distance) * force;
         }
-
         skill.vx *= 0.985;
         skill.vy *= 0.985;
         const speed = Math.hypot(skill.vx, skill.vy);
-        if (speed > 1.35) {
-          skill.vx = (skill.vx / speed) * 1.35;
-          skill.vy = (skill.vy / speed) * 1.35;
-        }
-
+        if (speed > 1.25) { skill.vx = (skill.vx / speed) * 1.25; skill.vy = (skill.vy / speed) * 1.25; }
         skill.x += skill.vx;
         skill.y += skill.vy;
-
-        if (skill.x < -160) skill.x = viewportWidth + 20;
-        if (skill.x > viewportWidth + 160) skill.x = -20;
-        if (skill.y < -30) skill.y = viewportHeight + 20;
-        if (skill.y > viewportHeight + 30) skill.y = -20;
+        if (skill.x < -180) skill.x = viewportWidth + 20;
+        if (skill.x > viewportWidth + 180) skill.x = -20;
+        if (skill.y < -35) skill.y = viewportHeight + 20;
+        if (skill.y > viewportHeight + 35) skill.y = -20;
       }
-
-      const alpha = 0.045 + proximity * 0.22 + (index % 3) * 0.008;
-      context.font = `600 ${skill.size}px Inter, sans-serif`;
-      context.letterSpacing = "1px";
-      context.fillStyle = `rgba(226, 194, 117, ${alpha})`;
+      context.font = `600 ${skill.size}px Manrope, sans-serif`;
+      context.fillStyle = `rgba(237, 200, 115, ${0.045 + proximity * 0.24 + (index % 3) * 0.008})`;
       context.shadowBlur = proximity * 18;
-      context.shadowColor = "rgba(226, 194, 117, 0.45)";
+      context.shadowColor = "rgba(237, 200, 115, 0.5)";
       context.fillText(skill.label, skill.x, skill.y);
       context.shadowBlur = 0;
     });
-
-    if (shouldAnimate) animationFrame = window.requestAnimationFrame(() => drawFrame(true));
+    if (animate) animationFrame = window.requestAnimationFrame(() => drawFrame(true));
   };
 
   resizeCanvas();
-  if (reduceMotion) drawFrame(false);
-  else drawFrame(true);
+  drawFrame(!reduceMotion);
 
   window.addEventListener("resize", () => {
     window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(() => {
-      resizeCanvas();
-      if (reduceMotion) drawFrame(false);
-    }, 160);
+    resizeTimer = window.setTimeout(() => { resizeCanvas(); if (reduceMotion) drawFrame(false); }, 160);
+  });
+  window.addEventListener("portfolio-language-change", (event) => {
+    activeLanguage = event.detail.language;
+    createFloatingSkills();
+    if (reduceMotion) drawFrame(false);
   });
 
   if (finePointer) {
-    window.addEventListener(
-      "pointermove",
-      (event) => {
-        pointer.x = event.clientX;
-        pointer.y = event.clientY;
-        pointer.active = true;
-        if (cursorGlow) {
-          cursorGlow.classList.add("is-visible");
-          cursorGlow.style.transform = `translate3d(${event.clientX - 210}px, ${event.clientY - 210}px, 0)`;
-        }
-      },
-      { passive: true },
-    );
-
-    document.documentElement.addEventListener("mouseleave", () => {
-      pointer.active = false;
-      cursorGlow?.classList.remove("is-visible");
-    });
+    window.addEventListener("pointermove", (event) => {
+      pointer.x = event.clientX;
+      pointer.y = event.clientY;
+      pointer.active = true;
+      cursorGlow?.classList.add("is-visible");
+      if (cursorGlow) cursorGlow.style.transform = `translate3d(${event.clientX - 215}px, ${event.clientY - 215}px, 0)`;
+    }, { passive: true });
+    document.documentElement.addEventListener("mouseleave", () => { pointer.active = false; cursorGlow?.classList.remove("is-visible"); });
   }
 
   document.addEventListener("visibilitychange", () => {
     if (reduceMotion) return;
-    if (document.hidden && animationFrame) {
-      window.cancelAnimationFrame(animationFrame);
-      animationFrame = null;
-    } else if (!document.hidden && !animationFrame) {
-      drawFrame(true);
-    }
+    if (document.hidden && animationFrame) { window.cancelAnimationFrame(animationFrame); animationFrame = null; }
+    else if (!document.hidden && !animationFrame) drawFrame(true);
   });
 }
 

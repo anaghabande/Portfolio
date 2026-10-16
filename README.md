@@ -1,6 +1,8 @@
-# Anagha Bande — Professional Portfolio
+# Anagha Arun Bande — Professional Portfolio
 
-A responsive, dependency-free portfolio focused on operations, supply chain, analytics, and global strategy. The visual system uses a minimal dark interface, translucent glass surfaces, an interactive halo timeline, expandable business case studies, and cursor-reactive floating skills.
+A responsive portfolio focused on operations, supply chain, analytics, and global strategy. The visual system uses an espresso-brown and gold palette, warm glass surfaces, a halo timeline, expandable evidence-based project studies, Anagha's portrait, cursor-reactive skills, undergraduate highlights, and concise faculty endorsements.
+
+The interface supports English, Hindi, French, Marathi, Spanish, Arabic, Portuguese, German, and Japanese. Arabic automatically uses a right-to-left layout, and the selected language is remembered locally.
 
 ## Run locally
 
@@ -10,7 +12,9 @@ Open `index.html` directly in a browser, or serve the directory with any static 
 
 - `index.html` — semantic content and page structure
 - `styles.css` — design system, responsive layout, motion, and print styles
-- `script.js` — mobile navigation, active section state, interactive timeline, reveal effects, and the responsive skill-field canvas
-- `AAB_Resume_Sept2026.docx` — downloadable résumé
+- `script.js` — mobile navigation, localization, project filters, reveal effects, and the responsive skill-field canvas
+- `translations.js` — in-page translations and language-specific portfolio copy
+- `Gemini_Generated_Image_9l470t9l470t9l47.png` — portfolio portrait
+- `.vercelignore` — keeps private source documents out of the public deployment
 
 The site uses Google Fonts for typography and otherwise has no packages, frameworks, plugins, or analytics.
