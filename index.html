@@ -3,11 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Anagha Bande is an operations, supply chain, and analytics professional with a global management perspective."
-    />
-    <meta name="theme-color" content="#f7f4ef" />
+    <meta name="description" content="Portfolio of Anagha Bande, an operations, supply chain, analytics, and global strategy professional." />
+    <meta name="theme-color" content="#0a0b0d" />
     <title>Anagha Bande | Operations, Supply Chain &amp; Analytics</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
@@ -16,499 +13,109 @@
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
-
+    <canvas class="skill-canvas" id="skill-canvas" aria-hidden="true"></canvas>
+    <div class="cursor-glow" data-cursor-glow aria-hidden="true"></div>
     <header class="site-header" data-header>
-      <div class="nav-shell">
-        <a class="brand" href="#top" aria-label="Anagha Bande, back to top">
-          <span class="brand-mark" aria-hidden="true">AB</span>
-          <span class="brand-name">Anagha Bande</span>
-        </a>
-
-        <button
-          class="nav-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="primary-navigation"
-          data-nav-toggle
-        >
-          <span class="sr-only">Open navigation</span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </button>
-
+      <div class="nav-container">
+        <a class="nav-logo" href="#top" aria-label="Anagha Bande, back to top"><span class="logo-mark" aria-hidden="true">AB</span><span class="logo-name">Anagha Bande</span></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-nav-toggle><span class="sr-only">Open navigation</span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
         <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation" data-nav>
-          <a href="#about">About</a>
-          <a href="#experience">Experience</a>
-          <a href="#projects">Projects</a>
-          <a href="#leadership">Leadership</a>
-          <a href="#skills">Skills</a>
-          <a href="#education">Education</a>
-          <a href="#contact">Contact</a>
-          <a class="nav-resume" href="AAB_Resume_Sept2026.docx" download>Résumé</a>
+          <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#leadership">Leadership</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="#contact">Contact</a><a class="nav-cta" href="AAB_Resume_Sept2026.docx" download>Résumé</a>
         </nav>
       </div>
     </header>
 
     <main id="main-content">
-      <section class="hero" id="top" aria-labelledby="hero-title">
-        <div class="hero-grid page-shell">
-          <div class="hero-copy reveal">
-            <p class="eyebrow">Global management · Operational performance</p>
-            <h1 id="hero-title">Anagha<br />Bande</h1>
-            <p class="hero-role">Operations <span>·</span> Supply Chain <span>·</span> Analytics <span>·</span> Global Strategy</p>
-            <p class="hero-statement">
-              I turn operational, supply chain, and business data into actionable decisions that improve performance,
-              efficiency, and strategic outcomes.
-            </p>
-            <div class="hero-actions" aria-label="Primary actions">
-              <a class="button button-primary" href="#projects">View my work</a>
-              <a class="button button-secondary" href="AAB_Resume_Sept2026.docx" download>Download résumé</a>
-            </div>
-            <div class="hero-contact" aria-label="Contact links">
-              <a href="mailto:abande25@asu.edu">abande25@asu.edu</a>
-              <span aria-hidden="true">/</span>
-              <a href="https://www.linkedin.com/in/abande25" target="_blank" rel="noreferrer">LinkedIn</a>
-            </div>
-          </div>
-
-          <aside class="hero-framework reveal" aria-label="Professional approach">
-            <p class="framework-label">How I create value</p>
-            <ol>
-              <li>
-                <span>01</span>
-                <div><strong>Diagnose</strong><small>Translate operating data into the issue that matters.</small></div>
-              </li>
-              <li>
-                <span>02</span>
-                <div><strong>Decide</strong><small>Balance performance, inclusion, risk, and compliance.</small></div>
-              </li>
-              <li>
-                <span>03</span>
-                <div><strong>Improve</strong><small>Turn analysis into clearer processes and outcomes.</small></div>
-              </li>
-            </ol>
-            <p class="framework-footer">Phoenix, Arizona <span>·</span> Open to internships and full-time opportunities</p>
-          </aside>
+      <section class="hero page-shell" id="top" aria-labelledby="hero-title">
+        <div class="hero-content reveal">
+          <p class="hero-welcome">Global management portfolio</p>
+          <h1 id="hero-title">Anagha <span>Bande</span></h1>
+          <p class="hero-role">Operations · Supply Chain · Analytics · Global Strategy</p>
+          <div class="hero-description"><p>I turn operational, supply chain, and business data into actionable decisions that improve performance, efficiency, and strategic outcomes.</p></div>
+          <div class="hero-actions" aria-label="Primary actions"><a class="button button-primary" href="#projects">View my work <span aria-hidden="true">↘</span></a><a class="button button-outline" href="AAB_Resume_Sept2026.docx" download>Download résumé</a></div>
+          <div class="hero-links" aria-label="Contact links"><a href="mailto:abande25@asu.edu">Email</a><a href="https://www.linkedin.com/in/abande25" target="_blank" rel="noreferrer">LinkedIn</a><span>Phoenix, Arizona</span></div>
+        </div>
+        <div class="hero-visual reveal" aria-label="Professional profile overview">
+          <div class="visual-orbit orbit-one" aria-hidden="true"></div><div class="visual-orbit orbit-two" aria-hidden="true"></div>
+          <article class="profile-card">
+            <div class="profile-topline"><span>Operations / Analytics</span><span>2026</span></div>
+            <div class="profile-monogram" aria-hidden="true">AB</div>
+            <div class="profile-positioning"><p>Data</p><span aria-hidden="true">→</span><p>Decisions</p><span aria-hidden="true">→</span><p>Performance</p></div>
+            <div class="profile-status"><span class="status-dot" aria-hidden="true"></span><p><strong>Master of Global Management</strong><br />Thunderbird · Expected May 2027</p></div>
+            <div class="profile-metrics" aria-label="Selected impact metrics"><div><strong>40+</strong><span>Languages</span></div><div><strong>6,639</strong><span>Markets</span></div><div><strong>600+</strong><span>SKUs</span></div></div>
+          </article>
         </div>
       </section>
 
-      <section class="impact section-pad" aria-labelledby="impact-title">
+      <section class="career-map" aria-labelledby="career-map-title">
         <div class="page-shell">
-          <div class="section-intro compact reveal">
-            <p class="section-kicker">Impact at a glance</p>
-            <h2 id="impact-title">Evidence, not adjectives.</h2>
+          <div class="section-header compact reveal"><p class="section-label">Career map</p><h2 id="career-map-title">One professional story, built across disciplines.</h2><p>Explore the progression from technical operations to global management and strategy.</p></div>
+          <div class="career-track reveal" role="group" aria-label="Career milestones">
+            <div class="career-line" aria-hidden="true"></div>
+            <button class="career-point is-active" type="button" data-career-tab="foundation" aria-pressed="true" aria-controls="career-foundation"><span class="career-dot">01</span><span class="career-year">2023</span><strong>Technical foundation</strong></button>
+            <button class="career-point" type="button" data-career-tab="quality" aria-pressed="false" aria-controls="career-quality"><span class="career-dot">02</span><span class="career-year">2024</span><strong>Quality &amp; compliance</strong></button>
+            <button class="career-point" type="button" data-career-tab="global" aria-pressed="false" aria-controls="career-global"><span class="career-dot">03</span><span class="career-year">2025</span><strong>Global operations</strong></button>
+            <button class="career-point" type="button" data-career-tab="strategy" aria-pressed="false" aria-controls="career-strategy"><span class="career-dot">04</span><span class="career-year">2026</span><strong>Strategy &amp; leadership</strong></button>
           </div>
-          <div class="impact-grid">
-            <article class="impact-item reveal">
-              <strong>40+</strong>
-              <h3>Languages</h3>
-              <p>Expanded global learner access by localizing 100+ online courses.</p>
-            </article>
-            <article class="impact-item reveal">
-              <strong>6,639</strong>
-              <h3>Markets</h3>
-              <p>Analyzed to inform an AI-driven agricultural procurement strategy.</p>
-            </article>
-            <article class="impact-item reveal">
-              <strong>150+</strong>
-              <h3>Tickets per term</h3>
-              <p>Resolved technology issues affecting reliable learning for 1,000+ students.</p>
-            </article>
-            <article class="impact-item reveal">
-              <strong>600+</strong>
-              <h3>SKUs</h3>
-              <p>Supported manufacturing quality with a 97%+ compliance pass rate.</p>
-            </article>
-            <article class="impact-item reveal">
-              <strong>250+</strong>
-              <h3>Samples</h3>
-              <p>Processed across 12 food categories for safety and regulatory analysis.</p>
-            </article>
+          <div class="career-panels reveal" aria-live="polite">
+            <article class="career-panel" id="career-foundation" data-career-panel="foundation"><p class="panel-type">Foundation</p><h3>Engineering discipline meets manufacturing operations.</h3><p>B.Tech. in Chemical Engineering and Food Technology, followed by production-line exposure and quality analysis across 600+ confectionery SKUs.</p></article>
+            <article class="career-panel" id="career-quality" data-career-panel="quality" hidden><p class="panel-type">Quality &amp; compliance</p><h3>Turning testing data into faster, clearer compliance decisions.</h3><p>Food safety and regulatory analysis across 12 product categories and 250+ samples, with an approximately 30% reduction in reporting turnaround.</p></article>
+            <article class="career-panel" id="career-global" data-career-panel="global" hidden><p class="panel-type">Global operations</p><h3>Expanding from process performance to global program delivery.</h3><p>Joined Thunderbird, supported global course localization, strengthened technology operations, and managed environmental and water-performance reporting.</p></article>
+            <article class="career-panel" id="career-strategy" data-career-panel="strategy" hidden><p class="panel-type">Strategy &amp; leadership</p><h3>Applying analytics to procurement, growth, and management decisions.</h3><p>Built business analyses across 6,639 agricultural markets while developing leadership range through operations, partnerships, research, and project management communities.</p></article>
           </div>
         </div>
       </section>
 
       <section class="about section-pad" id="about" aria-labelledby="about-title">
-        <div class="page-shell split-layout">
-          <div class="section-intro reveal">
-            <p class="section-number">01 / About</p>
-            <h2 id="about-title">A technical foundation, applied to business decisions.</h2>
-          </div>
-          <div class="about-copy reveal">
-            <p class="lead-copy">
-              I am pursuing a Master of Global Management at Thunderbird School of Global Management, building on a
-              foundation in Chemical Engineering and Food Technology.
-            </p>
-            <p>
-              My experience spans manufacturing, quality and compliance, technology operations, research, and global
-              program delivery. Across those settings, the common thread is operational: understand a process, use
-              evidence to locate the constraint, and help teams make a stronger decision.
-            </p>
-            <p>
-              That path has shaped my focus on operations, supply chain, analytics, and strategy—fields where technical
-              rigor and a global business perspective can improve both day-to-day performance and longer-term outcomes.
-            </p>
-            <ul class="focus-list" aria-label="Areas of focus">
-              <li>Operational performance</li>
-              <li>Supply chain analysis</li>
-              <li>Data-informed strategy</li>
-              <li>Quality &amp; compliance</li>
-            </ul>
+        <div class="page-shell">
+          <div class="section-header reveal"><p class="section-label">01 / About</p><h2 id="about-title">Technical depth. Global perspective. Operational focus.</h2><p>I connect how systems work with how organizations decide—bringing process discipline, analytical thinking, and a management lens to operational challenges.</p></div>
+          <div class="about-grid">
+            <article class="about-story surface-card reveal"><p class="card-kicker">Professional profile</p><h3>From engineering processes to business performance.</h3><p>I am pursuing a Master of Global Management at Thunderbird School of Global Management, building on a background in Chemical Engineering and Food Technology.</p><p>My experience spans manufacturing, quality and compliance, technology operations, research, and global program delivery. Across each setting, I use evidence to understand constraints, align stakeholders, and improve decisions.</p></article>
+            <div class="impact-grid" aria-label="Impact at a glance">
+              <article class="impact-card reveal"><strong>40+</strong><span>Languages</span><p>Expanded global access through localization of 100+ courses.</p></article>
+              <article class="impact-card reveal"><strong>6,639</strong><span>Markets</span><p>Analyzed for an AI-driven agricultural procurement strategy.</p></article>
+              <article class="impact-card reveal"><strong>1,000+</strong><span>Students</span><p>Supported through reliable classroom technology operations.</p></article>
+              <article class="impact-card reveal"><strong>97%+</strong><span>Pass rate</span><p>Maintained across quality testing for 600+ confectionery SKUs.</p></article>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="experience section-pad" id="experience" aria-labelledby="experience-title">
-        <div class="page-shell">
-          <div class="section-intro reveal">
-            <p class="section-number">02 / Experience</p>
-            <h2 id="experience-title">Operating across systems, standards, and stakeholders.</h2>
-            <p>Experience connected by process discipline, measurable improvement, and cross-functional delivery.</p>
-          </div>
-
-          <div class="timeline">
-            <article class="timeline-item reveal">
-              <div class="timeline-meta">
-                <p>Mar 2025 — Present</p>
-                <p>Phoenix, Arizona</p>
-              </div>
-              <div class="timeline-content">
-                <p class="company">Arizona State University</p>
-                <h3>Graduate Service Assistant</h3>
-                <p class="role-focus">Global program operations · AI-enabled localization · Program coordination</p>
-                <ul>
-                  <li>Localized 100+ online courses into 40+ languages through HeyGen AI, expanding global learner access.</li>
-                  <li>Led content planning and production for the 100 Million Learners AI initiative to support engagement.</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="timeline-item reveal">
-              <div class="timeline-meta">
-                <p>Nov 2025 — Present</p>
-                <p>Phoenix, Arizona</p>
-              </div>
-              <div class="timeline-content">
-                <p class="company">Arizona State University</p>
-                <h3>IT Operations Support</h3>
-                <p class="role-focus">Operational support · Issue resolution · Stakeholder service</p>
-                <ul>
-                  <li>Resolve 150+ classroom technology and AV tickets per term, reducing disruption for 1,000+ students.</li>
-                  <li>Manage alumni requests in Salesforce and Monday.com, improving resolution turnaround by approximately 25%.</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="timeline-item reveal">
-              <div class="timeline-meta">
-                <p>Apr 2025 — Jun 2025</p>
-                <p>Nagpur, India</p>
-              </div>
-              <div class="timeline-content">
-                <p class="company">Coca-Cola</p>
-                <h3>Quality Executive</h3>
-                <p class="role-focus">Quality management · Environmental compliance · KPI monitoring</p>
-                <ul>
-                  <li>Managed effluent treatment plant operations and water-quality testing, sustaining 100% environmental compliance.</li>
-                  <li>Calculated Water Use Ratio and KPIs under KORE PRP-RQ-130, improving reporting accuracy by approximately 18%.</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="timeline-item reveal">
-              <div class="timeline-meta">
-                <p>Nov 2024 — Mar 2025</p>
-                <p>Nagpur, India</p>
-              </div>
-              <div class="timeline-content">
-                <p class="company">Food and Drug Administration</p>
-                <h3>Technical Analyst</h3>
-                <p class="role-focus">Regulatory compliance · Quality analytics · Operational reporting</p>
-                <ul>
-                  <li>Tested 12 food-product categories for chemical safety, processing 250+ samples against FSSAI limits.</li>
-                  <li>Compiled instrument data in Excel and issued compliance calls, reducing reporting turnaround by approximately 30%.</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="timeline-item reveal">
-              <div class="timeline-meta">
-                <p>May 2023 — Oct 2024</p>
-                <p>Nagpur, India</p>
-              </div>
-              <div class="timeline-content">
-                <p class="company">Candico India Limited</p>
-                <h3>Quality Analyst</h3>
-                <p class="role-focus">Manufacturing operations · Variance analysis · Continuous improvement</p>
-                <ul>
-                  <li>Ran compliance testing on 600+ confectionery SKUs against FSSAI standards, maintaining a 97%+ pass rate.</li>
-                  <li>Led variance analysis and corrective actions that reduced manufacturing defects by approximately 12%.</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="timeline-item reveal">
-              <div class="timeline-meta">
-                <p>Feb 2023 — Apr 2023</p>
-                <p>Nagpur, India</p>
-              </div>
-              <div class="timeline-content">
-                <p class="company">Mother Dairy</p>
-                <h3>Operations Intern</h3>
-                <p class="role-focus">Production operations · Quality control · Cross-functional coordination</p>
-                <ul>
-                  <li>Performed chemical, microbiological, and packaging tests across four production lines to verify safety.</li>
-                  <li>Documented testing workflows, improving operational visibility across five cross-functional teams.</li>
-                </ul>
-              </div>
-            </article>
+      <section class="experience section-pad section-tint" id="experience" aria-labelledby="experience-title">
+        <div class="page-shell narrow-shell">
+          <div class="section-header reveal"><p class="section-label">02 / Experience</p><h2 id="experience-title">Experience that connects analysis to execution.</h2><p>Hands-on work across global programs, technology operations, manufacturing, quality, and compliance.</p></div>
+          <div class="experience-list">
+            <article class="experience-card surface-card reveal" tabindex="0"><header class="experience-heading"><div class="company-logo" aria-hidden="true">ASU</div><div><p class="company">Arizona State University</p><h3>Graduate Service Assistant</h3><p class="location">Phoenix, Arizona</p></div><div class="experience-meta"><span>Mar 2025 — Present</span><small>Global program operations</small></div></header><div class="experience-body"><ul><li>Localized 100+ online courses into 40+ languages through HeyGen AI, expanding global learner access.</li><li>Led content planning and production for the 100 Million Learners AI initiative to support engagement.</li></ul><div class="tag-list"><span>Localization</span><span>Program Coordination</span><span>Global Access</span></div></div></article>
+            <article class="experience-card surface-card reveal" tabindex="0"><header class="experience-heading"><div class="company-logo" aria-hidden="true">ASU</div><div><p class="company">Arizona State University</p><h3>IT Operations Support</h3><p class="location">Phoenix, Arizona</p></div><div class="experience-meta"><span>Nov 2025 — Present</span><small>Operational support</small></div></header><div class="experience-body"><ul><li>Resolve 150+ classroom technology and AV tickets per term, reducing disruption for 1,000+ students.</li><li>Manage alumni requests in Salesforce and Monday.com, improving resolution turnaround by approximately 25%.</li></ul><div class="tag-list"><span>Salesforce</span><span>Issue Resolution</span><span>Process Efficiency</span></div></div></article>
+            <article class="experience-card surface-card reveal" tabindex="0"><header class="experience-heading"><div class="company-logo" aria-hidden="true">CC</div><div><p class="company">Coca-Cola</p><h3>Quality Executive</h3><p class="location">Nagpur, India</p></div><div class="experience-meta"><span>Apr 2025 — Jun 2025</span><small>Quality &amp; compliance</small></div></header><div class="experience-body"><ul><li>Managed effluent treatment plant operations and water-quality testing, sustaining 100% environmental compliance.</li><li>Calculated Water Use Ratio and KORE KPIs, improving reporting accuracy by approximately 18%.</li></ul><div class="tag-list"><span>ETP Operations</span><span>KPI Monitoring</span><span>Water Management</span></div></div></article>
+            <article class="experience-card surface-card reveal" tabindex="0"><header class="experience-heading"><div class="company-logo" aria-hidden="true">FDA</div><div><p class="company">Food and Drug Administration</p><h3>Technical Analyst</h3><p class="location">Nagpur, India</p></div><div class="experience-meta"><span>Nov 2024 — Mar 2025</span><small>Regulatory analytics</small></div></header><div class="experience-body"><ul><li>Tested 12 food-product categories for chemical safety, processing 250+ samples against FSSAI limits.</li><li>Compiled instrument data in Excel and issued compliance calls, reducing reporting turnaround by approximately 30%.</li></ul><div class="tag-list"><span>FSSAI</span><span>Excel Analysis</span><span>Food Safety</span></div></div></article>
+            <article class="experience-card surface-card reveal" tabindex="0"><header class="experience-heading"><div class="company-logo" aria-hidden="true">CI</div><div><p class="company">Candico India Limited</p><h3>Quality Analyst</h3><p class="location">Nagpur, India</p></div><div class="experience-meta"><span>May 2023 — Oct 2024</span><small>Manufacturing quality</small></div></header><div class="experience-body"><ul><li>Ran compliance testing on 600+ confectionery SKUs against FSSAI standards, maintaining a 97%+ pass rate.</li><li>Led variance analysis and corrective actions that reduced manufacturing defects by approximately 12%.</li></ul><div class="tag-list"><span>Variance Analysis</span><span>Corrective Action</span><span>Continuous Improvement</span></div></div></article>
+            <article class="experience-card surface-card reveal" tabindex="0"><header class="experience-heading"><div class="company-logo" aria-hidden="true">MD</div><div><p class="company">Mother Dairy</p><h3>Operations Intern</h3><p class="location">Nagpur, India</p></div><div class="experience-meta"><span>Feb 2023 — Apr 2023</span><small>Production operations</small></div></header><div class="experience-body"><ul><li>Performed chemical, microbiological, and packaging tests across four production lines to verify safety.</li><li>Documented testing workflows, improving operational visibility across five cross-functional teams.</li></ul><div class="tag-list"><span>Production</span><span>Quality Control</span><span>Documentation</span></div></div></article>
           </div>
         </div>
       </section>
 
       <section class="projects section-pad" id="projects" aria-labelledby="projects-title">
         <div class="page-shell">
-          <div class="section-intro projects-heading reveal">
-            <div>
-              <p class="section-number">03 / Selected work</p>
-              <h2 id="projects-title">Business questions, structured through evidence.</h2>
-            </div>
-            <p>Each case connects analysis to a decision—not analysis for its own sake.</p>
-          </div>
-
-          <div class="project-list">
-            <details class="project-card reveal" open>
-              <summary>
-                <span class="project-index">01</span>
-                <span class="project-title-group">
-                  <small>Supply chain · Procurement · Analytics</small>
-                  <strong>Efficiency vs. Inclusion in AI-Driven Agricultural Procurement</strong>
-                </span>
-                <span class="project-toggle" aria-hidden="true"></span>
-              </summary>
-              <div class="project-body">
-                <dl class="case-grid">
-                  <div><dt>Business problem</dt><dd>How can AI-informed procurement improve efficiency without overlooking inclusion across agricultural markets?</dd></div>
-                  <div><dt>Approach</dt><dd>Structured a market-level procurement analysis across 6,639 agricultural markets in India.</dd></div>
-                  <div><dt>Analysis</dt><dd>Compared procurement considerations through the linked lenses of market reach, efficiency, and inclusion.</dd></div>
-                  <div><dt>Key insight</dt><dd>Efficiency and inclusion must be treated as explicit procurement design tradeoffs.</dd></div>
-                  <div><dt>Recommendation</dt><dd>Developed AI-driven procurement recommendations that keep inclusion visible in the decision.</dd></div>
-                  <div><dt>Tools</dt><dd>Market analysis · AI-informed decision framework · Procurement analysis</dd></div>
-                </dl>
-                <p class="business-relevance"><strong>Business relevance</strong> Demonstrates how analytics can support more considered procurement and supply-chain decisions at scale.</p>
-              </div>
-            </details>
-
-            <details class="project-card reveal">
-              <summary>
-                <span class="project-index">02</span>
-                <span class="project-title-group">
-                  <small>Global strategy · Market entry · Sustainability</small>
-                  <strong>Global Market Entry &amp; Strategy</strong>
-                </span>
-                <span class="project-toggle" aria-hidden="true"></span>
-              </summary>
-              <div class="project-body">
-                <dl class="case-grid">
-                  <div><dt>Business problem</dt><dd>Identify a credible path for global expansion under market, sustainability, and strategic risk constraints.</dd></div>
-                  <div><dt>Approach</dt><dd>Evaluated sustainability-focused opportunities, entry modes, and market risks.</dd></div>
-                  <div><dt>Analysis</dt><dd>Compared expansion alternatives through market attractiveness, entry structure, and risk.</dd></div>
-                  <div><dt>Key insight</dt><dd>Entry-mode choice and local risk shape whether an attractive market becomes a viable strategy.</dd></div>
-                  <div><dt>Recommendation</dt><dd>Formed an expansion recommendation grounded in the evaluated opportunities, modes, and risks.</dd></div>
-                  <div><dt>Tools</dt><dd>Market evaluation · Entry-mode analysis · Strategic risk analysis</dd></div>
-                </dl>
-                <p class="business-relevance"><strong>Business relevance</strong> Connects global growth ambition with disciplined market selection and execution risk.</p>
-              </div>
-            </details>
-
-            <details class="project-card reveal">
-              <summary>
-                <span class="project-index">03</span>
-                <span class="project-title-group">
-                  <small>Financial analysis · Strategy · Decision support</small>
-                  <strong>Financial Performance Analysis</strong>
-                </span>
-                <span class="project-toggle" aria-hidden="true"></span>
-              </summary>
-              <div class="project-body">
-                <dl class="case-grid">
-                  <div><dt>Business problem</dt><dd>Understand the operating and financing factors shaping business performance.</dd></div>
-                  <div><dt>Approach</dt><dd>Applied a Modified DuPont framework to separate the drivers of financial returns.</dd></div>
-                  <div><dt>Analysis</dt><dd>Assessed return on equity, return on invested capital, leverage, and cash flow.</dd></div>
-                  <div><dt>Key insight</dt><dd>A return metric is more decision-useful when its operating and capital drivers are visible.</dd></div>
-                  <div><dt>Recommendation</dt><dd>Used the driver-level assessment to frame financial decision considerations.</dd></div>
-                  <div><dt>Tools</dt><dd>Modified DuPont framework · ROE · ROIC · Cash-flow analysis</dd></div>
-                </dl>
-                <p class="business-relevance"><strong>Business relevance</strong> Translates financial performance into the levers managers can evaluate and act on.</p>
-              </div>
-            </details>
-
-            <details class="project-card reveal">
-              <summary>
-                <span class="project-index">04</span>
-                <span class="project-title-group">
-                  <small>Analytics · Automotive · Market research</small>
-                  <strong>General Motors Data Analytics</strong>
-                </span>
-                <span class="project-toggle" aria-hidden="true"></span>
-              </summary>
-              <div class="project-body">
-                <dl class="case-grid">
-                  <div><dt>Business problem</dt><dd>Clarify growth and market-positioning choices in the evolving electric-vehicle market.</dd></div>
-                  <div><dt>Approach</dt><dd>Combined EV market analysis with a review of the competitive landscape.</dd></div>
-                  <div><dt>Analysis</dt><dd>Examined market dynamics, competitive positioning, and growth considerations for General Motors.</dd></div>
-                  <div><dt>Key insight</dt><dd>Market growth needs to be evaluated alongside competitive differentiation and positioning.</dd></div>
-                  <div><dt>Recommendation</dt><dd>Developed data-informed recommendations for EV growth and market positioning.</dd></div>
-                  <div><dt>Tools</dt><dd>Market research · Competitive analysis · Data analytics</dd></div>
-                </dl>
-                <p class="business-relevance"><strong>Business relevance</strong> Shows how market and competitor evidence can shape strategic growth choices.</p>
-              </div>
-            </details>
+          <div class="section-header reveal"><p class="section-label">03 / Selected work</p><h2 id="projects-title">Business cases built around decisions.</h2><p>Open each case study to see the problem, analytical approach, insight, and business relevance.</p></div>
+          <div class="projects-grid">
+            <details class="project-card surface-card reveal"><summary><div class="tag-list"><span>Supply Chain</span><span>Procurement</span><span>AI</span></div><h3>Efficiency vs. Inclusion in AI-Driven Agricultural Procurement</h3><p>How can AI-informed procurement improve efficiency without overlooking inclusion?</p><span class="project-link">View case study <span aria-hidden="true">↘</span></span></summary><div class="project-details"><dl><div><dt>Business problem</dt><dd>Balance procurement efficiency with inclusion across agricultural markets.</dd></div><div><dt>Approach</dt><dd>Structured a market-level analysis across 6,639 agricultural markets in India.</dd></div><div><dt>Analysis</dt><dd>Compared market reach, efficiency, and inclusion considerations.</dd></div><div><dt>Key insight</dt><dd>Efficiency and inclusion must be explicit procurement design tradeoffs.</dd></div><div><dt>Recommendation</dt><dd>Developed AI-driven recommendations that keep inclusion visible in the decision.</dd></div><div><dt>Tools</dt><dd>Market analysis · AI-informed decision framework · Procurement analysis</dd></div></dl><p class="project-relevance"><strong>Business relevance:</strong> Analytics can support more considered procurement and supply-chain decisions at scale.</p></div></details>
+            <details class="project-card surface-card reveal"><summary><div class="tag-list"><span>Global Strategy</span><span>Market Entry</span><span>Risk</span></div><h3>Global Market Entry &amp; Strategy</h3><p>Identify a credible expansion path under market, sustainability, and risk constraints.</p><span class="project-link">View case study <span aria-hidden="true">↘</span></span></summary><div class="project-details"><dl><div><dt>Business problem</dt><dd>Identify a credible path for global expansion.</dd></div><div><dt>Approach</dt><dd>Evaluated sustainability-focused opportunities, entry modes, and market risks.</dd></div><div><dt>Analysis</dt><dd>Compared alternatives through market attractiveness, entry structure, and risk.</dd></div><div><dt>Key insight</dt><dd>Entry mode and local risk shape whether an attractive market becomes viable.</dd></div><div><dt>Recommendation</dt><dd>Formed an expansion recommendation grounded in the evaluated options.</dd></div><div><dt>Tools</dt><dd>Market evaluation · Entry-mode analysis · Strategic risk analysis</dd></div></dl><p class="project-relevance"><strong>Business relevance:</strong> Connects global growth ambition with disciplined market selection and execution risk.</p></div></details>
+            <details class="project-card surface-card reveal"><summary><div class="tag-list"><span>Finance</span><span>Analytics</span><span>Strategy</span></div><h3>Financial Performance Analysis</h3><p>Understand the operating and financing factors shaping business performance.</p><span class="project-link">View case study <span aria-hidden="true">↘</span></span></summary><div class="project-details"><dl><div><dt>Business problem</dt><dd>Clarify the drivers shaping business performance.</dd></div><div><dt>Approach</dt><dd>Applied a Modified DuPont framework to separate drivers of return.</dd></div><div><dt>Analysis</dt><dd>Assessed ROE, ROIC, leverage, and cash flow.</dd></div><div><dt>Key insight</dt><dd>Returns are more decision-useful when operating and capital drivers are visible.</dd></div><div><dt>Recommendation</dt><dd>Used the driver-level assessment to frame financial decisions.</dd></div><div><dt>Tools</dt><dd>Modified DuPont · ROE · ROIC · Cash-flow analysis</dd></div></dl><p class="project-relevance"><strong>Business relevance:</strong> Translates financial performance into levers managers can evaluate and act on.</p></div></details>
+            <details class="project-card surface-card reveal"><summary><div class="tag-list"><span>Automotive</span><span>Market Research</span><span>Growth</span></div><h3>General Motors Data Analytics</h3><p>Clarify growth and positioning choices in the evolving electric-vehicle market.</p><span class="project-link">View case study <span aria-hidden="true">↘</span></span></summary><div class="project-details"><dl><div><dt>Business problem</dt><dd>Clarify EV growth and positioning choices.</dd></div><div><dt>Approach</dt><dd>Combined EV market analysis with a review of the competitive landscape.</dd></div><div><dt>Analysis</dt><dd>Examined market dynamics, competition, and growth considerations.</dd></div><div><dt>Key insight</dt><dd>Growth should be evaluated alongside differentiation and positioning.</dd></div><div><dt>Recommendation</dt><dd>Developed data-informed recommendations for EV growth and market positioning.</dd></div><div><dt>Tools</dt><dd>Market research · Competitive analysis · Data analytics</dd></div></dl><p class="project-relevance"><strong>Business relevance:</strong> Shows how market and competitor evidence can shape strategic growth choices.</p></div></details>
           </div>
         </div>
       </section>
 
-      <section class="leadership section-pad" id="leadership" aria-labelledby="leadership-title">
-        <div class="page-shell split-layout">
-          <div class="section-intro reveal">
-            <p class="section-number">04 / Leadership</p>
-            <h2 id="leadership-title">Building range beyond the classroom.</h2>
-            <p>Developing leadership through operations, partnerships, research, and cross-functional involvement.</p>
-          </div>
-          <div class="leadership-list">
-            <article class="leadership-item reveal">
-              <p>2026 — Present</p>
-              <h3>Partnerships &amp; Research</h3>
-              <p>Case Scholars Club</p>
-              <small>Thunderbird School of Global Management</small>
-            </article>
-            <article class="leadership-item reveal">
-              <p>2025 — Present</p>
-              <h3>Associate Director of Operations</h3>
-              <p>AI Club</p>
-              <small>Thunderbird School of Global Management</small>
-            </article>
-            <article class="leadership-item reveal">
-              <p>2025 — Present</p>
-              <h3>Marketing Specialist</h3>
-              <p>International Project Management Club</p>
-              <small>Thunderbird School of Global Management</small>
-            </article>
-          </div>
-        </div>
-      </section>
+      <section class="leadership section-pad section-tint" id="leadership" aria-labelledby="leadership-title"><div class="page-shell"><div class="section-header reveal"><p class="section-label">04 / Leadership</p><h2 id="leadership-title">Developing range through active involvement.</h2><p>Leadership development across operations, partnerships, research, and project communities.</p></div><div class="leadership-grid"><article class="leadership-card surface-card reveal"><span class="leadership-index">01</span><p>2026 — Present</p><h3>Partnerships &amp; Research</h3><strong>Case Scholars Club</strong><small>Thunderbird School of Global Management</small></article><article class="leadership-card surface-card reveal"><span class="leadership-index">02</span><p>2025 — Present</p><h3>Associate Director of Operations</h3><strong>AI Club</strong><small>Thunderbird School of Global Management</small></article><article class="leadership-card surface-card reveal"><span class="leadership-index">03</span><p>2025 — Present</p><h3>Marketing Specialist</h3><strong>International Project Management Club</strong><small>Thunderbird School of Global Management</small></article></div></div></section>
 
-      <section class="skills section-pad" id="skills" aria-labelledby="skills-title">
-        <div class="page-shell">
-          <div class="section-intro reveal">
-            <p class="section-number">05 / Capabilities</p>
-            <h2 id="skills-title">Tools in service of better business decisions.</h2>
-          </div>
-          <div class="skills-grid">
-            <article class="skill-group reveal">
-              <p class="skill-number">01</p>
-              <h3>Operations &amp; Supply Chain</h3>
-              <ul>
-                <li>Operations Management</li><li>Supply Chain</li><li>Process Improvement</li>
-                <li>Quality Management</li><li>Procurement Analysis</li><li>KPI Monitoring</li><li>Operational Analysis</li>
-              </ul>
-            </article>
-            <article class="skill-group reveal">
-              <p class="skill-number">02</p>
-              <h3>Analytics</h3>
-              <ul>
-                <li>Data Analysis</li><li>Excel</li><li>Power BI</li><li>Tableau</li>
-                <li>Python</li><li>SPSS</li><li>LINGO</li>
-              </ul>
-            </article>
-            <article class="skill-group reveal">
-              <p class="skill-number">03</p>
-              <h3>Business &amp; Strategy</h3>
-              <ul>
-                <li>Global Strategy</li><li>Market Analysis</li><li>Strategic Analysis</li>
-                <li>Negotiation</li><li>Business Decision Making</li><li>Program Coordination</li>
-              </ul>
-            </article>
-            <article class="skill-group reveal">
-              <p class="skill-number">04</p>
-              <h3>Platforms &amp; Technology</h3>
-              <ul>
-                <li>Salesforce</li><li>Monday.com</li><li>HeyGen AI</li><li>LaTeX</li>
-              </ul>
-            </article>
-          </div>
-        </div>
-      </section>
+      <section class="skills section-pad" id="skills" aria-labelledby="skills-title"><div class="page-shell narrow-shell"><div class="section-header reveal"><p class="section-label">05 / Capabilities</p><h2 id="skills-title">Tools in service of better decisions.</h2><p>Business capabilities first; technology applied where it improves the quality or speed of the work.</p></div><div class="skills-grid"><article class="skill-card surface-card reveal"><div class="skill-icon" aria-hidden="true">01</div><h3>Operations &amp; Supply Chain</h3><ul><li>Operations Management</li><li>Supply Chain</li><li>Process Improvement</li><li>Quality Management</li><li>Procurement Analysis</li><li>KPI Monitoring</li><li>Operational Analysis</li></ul></article><article class="skill-card surface-card reveal"><div class="skill-icon" aria-hidden="true">02</div><h3>Analytics</h3><ul><li>Data Analysis</li><li>Excel</li><li>Power BI</li><li>Tableau</li><li>Python</li><li>SPSS</li><li>LINGO</li></ul></article><article class="skill-card surface-card reveal"><div class="skill-icon" aria-hidden="true">03</div><h3>Business &amp; Strategy</h3><ul><li>Global Strategy</li><li>Market Analysis</li><li>Strategic Analysis</li><li>Negotiation</li><li>Business Decision Making</li><li>Program Coordination</li></ul></article><article class="skill-card surface-card reveal"><div class="skill-icon" aria-hidden="true">04</div><h3>Platforms &amp; Technology</h3><ul><li>Salesforce</li><li>Monday.com</li><li>HeyGen AI</li><li>LaTeX</li></ul></article></div></div></section>
 
-      <section class="education section-pad" id="education" aria-labelledby="education-title">
-        <div class="page-shell">
-          <div class="section-intro reveal">
-            <p class="section-number">06 / Education</p>
-            <h2 id="education-title">Technical depth meets a global management lens.</h2>
-          </div>
-          <div class="education-path reveal">
-            <article>
-              <p class="education-date">Expected May 2027</p>
-              <p class="education-school">Thunderbird School of Global Management</p>
-              <h3>Master of Global Management</h3>
-              <p>Global Business · GPA 3.67</p>
-            </article>
-            <div class="path-connector" aria-hidden="true">
-              <span></span>
-              <p>From understanding how systems work<br />to deciding how organizations move.</p>
-              <span></span>
-            </div>
-            <article>
-              <p class="education-date">May 2023</p>
-              <p class="education-school">University Department of Chemical Technology</p>
-              <h3>Bachelor of Technology</h3>
-              <p>Chemical Engineering, Food Technology · GPA 3.957</p>
-            </article>
-          </div>
+      <section class="education section-pad section-tint" id="education" aria-labelledby="education-title"><div class="page-shell"><div class="section-header reveal"><p class="section-label">06 / Education</p><h2 id="education-title">Technical systems thinking meets global management.</h2><p>Two complementary disciplines connected by analysis, performance, and decision-making.</p></div><div class="education-grid"><article class="education-card surface-card reveal"><div class="education-mark" aria-hidden="true">T</div><div><span class="education-status">Expected 2027</span><h3>Master of Global Management</h3><p class="education-field">Global Business</p><strong>Thunderbird School of Global Management</strong><p>Expected May 2027 · GPA 3.67</p></div></article><article class="education-card surface-card reveal"><div class="education-mark" aria-hidden="true">U</div><div><span class="education-status complete">Completed 2023</span><h3>Bachelor of Technology</h3><p class="education-field">Chemical Engineering, Food Technology</p><strong>University Department of Chemical Technology</strong><p>May 2023 · GPA 3.957</p></div></article></div><div class="development-block reveal" aria-labelledby="development-title"><div class="development-heading"><p class="section-label">Professional development</p><h3 id="development-title">Certifications &amp; publication</h3></div><div class="cert-grid"><article><span>2026</span><h4>McKinsey Forward Program</h4></article><article><span>2023</span><h4>Advanced Certification in Mastering Excel</h4></article><article><span>2022</span><h4>Google Digital Marketing Certification</h4></article><article><span>2020</span><h4>ISRO Remote Sensing in Agricultural Water Management</h4></article><article class="publication"><span>Publication · 2022</span><h4>Bande, A. A. <em>Advanced Trends in Agricultural Extension</em>, Vol. 3</h4><p>Book chapter · ISBN 978-93-93502-04-9</p></article></div></div></div></section>
 
-          <div class="development reveal" aria-labelledby="development-title">
-            <div>
-              <p class="section-kicker">Professional development</p>
-              <h3 id="development-title">Certifications &amp; publication</h3>
-            </div>
-            <ul>
-              <li><span>2026</span> McKinsey Forward Program</li>
-              <li><span>2023</span> Advanced Certification in Mastering Excel</li>
-              <li><span>2022</span> Google Digital Marketing Certification</li>
-              <li><span>2020</span> ISRO Remote Sensing in Agricultural Water Management</li>
-              <li><span>2022</span> Bande, A. A. <em>Advanced Trends in Agricultural Extension</em>, Vol. 3 (Book Chapter)</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="contact section-pad" id="contact" aria-labelledby="contact-title">
-        <div class="page-shell contact-grid">
-          <div class="reveal">
-            <p class="section-number">07 / Contact</p>
-            <h2 id="contact-title">Let’s improve what happens next.</h2>
-          </div>
-          <div class="contact-copy reveal">
-            <p>
-              I’m interested in opportunities across operations, supply chain, business analytics, strategy, consulting,
-              and management.
-            </p>
-            <a class="contact-email" href="mailto:abande25@asu.edu">abande25@asu.edu <span aria-hidden="true">↗</span></a>
-            <div class="contact-links">
-              <a href="https://www.linkedin.com/in/abande25" target="_blank" rel="noreferrer">LinkedIn</a>
-              <a href="AAB_Resume_Sept2026.docx" download>Download résumé</a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section class="contact section-pad" id="contact" aria-labelledby="contact-title"><div class="page-shell contact-panel reveal"><div class="contact-content"><p class="section-label">07 / Contact</p><h2 id="contact-title">Let’s improve what happens next.</h2><p>I’m interested in opportunities across operations, supply chain, business analytics, strategy, consulting, and management.</p><a class="button button-light" href="mailto:abande25@asu.edu">Start a conversation <span aria-hidden="true">↗</span></a></div><div class="contact-details"><div><span>Email</span><a href="mailto:abande25@asu.edu">abande25@asu.edu</a></div><div><span>Phone</span><a href="tel:+16025497995">602 549 7995</a></div><div><span>LinkedIn</span><a href="https://www.linkedin.com/in/abande25" target="_blank" rel="noreferrer">linkedin.com/in/abande25</a></div><div><span>Location</span><p>Phoenix, Arizona</p></div></div></div></section>
     </main>
 
-    <footer class="site-footer">
-      <div class="page-shell">
-        <p>© <span data-year>2026</span> Anagha Bande</p>
-        <p>Operations · Supply Chain · Analytics · Strategy</p>
-        <a href="#top">Back to top ↑</a>
-      </div>
-    </footer>
+    <footer class="site-footer"><div class="page-shell"><p>© <span data-year>2026</span> Anagha Bande</p><p>Operations · Supply Chain · Analytics · Strategy</p><a href="#top">Back to top ↑</a></div></footer>
   </body>
 </html>
