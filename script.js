@@ -4,6 +4,41 @@ const navToggle = document.querySelector("[data-nav-toggle]");
 const navLinks = [...document.querySelectorAll('.primary-nav a[href^="#"]')];
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const experienceSection = document.querySelector("#experience");
+const educationSection = document.querySelector("#education");
+if (experienceSection && educationSection) experienceSection.insertAdjacentElement("afterend", educationSection);
+
+const projectsSection = document.querySelector("#projects");
+const foundationHeading = educationSection?.querySelector(".subsection-heading:not(.centered)");
+const foundationGrid = educationSection?.querySelector(".undergrad-grid");
+const publicationCard = educationSection?.querySelector(".publication-card");
+if (projectsSection && foundationHeading && foundationGrid && publicationCard) {
+  const foundationSection = document.createElement("section");
+  foundationSection.id = "foundation";
+  foundationSection.className = "section-pad section-warm standalone-subsection";
+  foundationSection.setAttribute("aria-labelledby", "foundation-title");
+  foundationHeading.querySelector("h3")?.setAttribute("id", "foundation-title");
+  const foundationShell = document.createElement("div");
+  foundationShell.className = "page-shell";
+  foundationShell.append(foundationHeading, foundationGrid, publicationCard);
+  foundationSection.append(foundationShell);
+  projectsSection.insertAdjacentElement("afterend", foundationSection);
+}
+
+const skillsSection = document.querySelector("#skills");
+const endorsements = educationSection?.querySelector("#endorsements");
+if (skillsSection && endorsements) {
+  const recommendationSection = document.createElement("section");
+  recommendationSection.id = "recommendations";
+  recommendationSection.className = "section-pad section-warm standalone-subsection";
+  recommendationSection.setAttribute("aria-labelledby", "endorsements-title");
+  const recommendationShell = document.createElement("div");
+  recommendationShell.className = "page-shell";
+  recommendationShell.append(endorsements);
+  recommendationSection.append(recommendationShell);
+  skillsSection.insertAdjacentElement("afterend", recommendationSection);
+}
+
 const closeNavigation = () => {
   if (!nav || !navToggle) return;
   nav.classList.remove("is-open");
@@ -71,6 +106,48 @@ if ("IntersectionObserver" in window) {
 
 const projectFilters = [...document.querySelectorAll("[data-project-filter]")];
 const projectCards = [...document.querySelectorAll("[data-project-category]")];
+
+const projectEnhancements = {
+  "01": { categories: "analytics strategy", repo: "https://github.com/anaghabande/chile-tourism-data-analytics", skills: ["Diagnostic analytics", "Predictive analytics", "Prescriptive analytics", "Forecasting", "Optimization", "Tableau", "Investment allocation"] },
+  "02": { categories: "marketing analytics", repo: "https://github.com/anaghabande/consumer-decision-making-experiment", skills: ["Experimental design", "SPSS", "Hypothesis testing", "Willingness to pay", "Consumer behavior"] },
+  "03": { categories: "strategy finance", repo: "https://github.com/anaghabande/global-leadership-strategy", skills: ["International expansion", "Country selection", "Stakeholder strategy", "Strategy execution"] },
+  "04": { categories: "analytics strategy", repo: "https://github.com/anaghabande/ai-machine-learning-business-strategy", skills: ["AI strategy", "Process redesign", "Procurement analytics", "Inclusion tradeoffs"] },
+  "05": { categories: "marketing sustainability", repo: "https://github.com/anaghabande/consumer-decision-making-experiment", skills: ["Product development", "Sensory analysis", "Consumer research", "Quality measurement"] },
+  "06": { categories: "sustainability strategy", repo: "https://github.com/anaghabande/global-entrepreneurship-sustainable-business", skills: ["Venture development", "Customer discovery", "Financial inclusion", "Business modeling"] },
+  "07": { categories: "sustainability strategy", repo: "https://github.com/anaghabande/global-entrepreneurship-sustainable-business", skills: ["Systems thinking", "Biodiversity", "Stakeholder analysis", "Sustainable supply chains"] },
+  "08": { categories: "strategy finance", repo: "https://github.com/anaghabande/emerging-market-global-strategy", skills: ["Competitive advantage", "Vertical integration", "Institutional environments", "Financial sustainability"] },
+  "09": { categories: "strategy", repo: "https://github.com/anaghabande/global-leadership-strategy", skills: ["Supply-chain risk", "PESTLE", "SWOT", "Strategic diversification"] },
+  "10": { categories: "strategy finance", repo: "https://github.com/anaghabande/global-leadership-strategy", skills: ["Market entry", "Five Forces", "Country prioritization", "Financial performance"] },
+  "11": { categories: "strategy", repo: "https://github.com/anaghabande/global-negotiation-cross-cultural-strategy", skills: ["Cross-cultural strategy", "International negotiation", "Cultural analysis", "Strategic communication"] },
+  "12": { categories: "marketing finance", repo: "https://github.com/anaghabande/global-marketing-data-visualization", skills: ["International marketing", "Pricing strategy", "Market analysis", "Tableau visualization"] },
+};
+
+projectCards.forEach((card) => {
+  const number = card.querySelector(".project-number")?.textContent.trim();
+  const enhancement = projectEnhancements[number];
+  if (!enhancement) return;
+  card.dataset.projectCategory = enhancement.categories;
+
+  const details = card.querySelector(".project-details");
+  if (!details || details.querySelector(".project-link")) return;
+  const skills = document.createElement("div");
+  skills.className = "project-skills";
+  skills.setAttribute("aria-label", "Methods and key skills");
+  skills.innerHTML = enhancement.skills.map((skill) => `<span>${skill}</span>`).join("");
+
+  const link = document.createElement("a");
+  link.className = "project-link";
+  link.href = enhancement.repo;
+  link.target = "_blank";
+  link.rel = "noreferrer";
+  link.innerHTML = 'View GitHub repository <span aria-hidden="true">↗</span>';
+  details.append(skills, link);
+});
+
+const endorsementGrid = document.querySelector(".endorsement-grid");
+if (endorsementGrid) {
+  endorsementGrid.insertAdjacentHTML("beforeend", `<figure class="endorsement-card endorsement-featured glass-card reveal is-visible"><blockquote>“Anagha brings thoughtfulness, consistency, quiet efficiency, and dependability to the 100 Million Learners team.”</blockquote><details class="recommendation-full"><summary>Read full recommendation</summary><div><p>Anagha works on my 100 Million Learners team at Thunderbird School of Global Management, where she brings thoughtfulness, consistency, and a willingness to contribute wherever the team needs her. She manages our learner support inbox, giving her direct insight into the experiences and needs of learners around the world, while also supporting additional research and projects across the initiative.</p><p>I especially appreciate Anagha's quiet efficiency and dependability. She approaches her work thoughtfully, follows through on her responsibilities, and is always willing to take on something new. Her combination of research skills, attention to the needs of the people we serve, and willingness to support a wide range of projects would translate well to research, partnership, and mission-driven roles. I am very happy to recommend her.</p></div></details><figcaption><strong>Samantha Alvis, Ph.D.</strong><span>Executive Director · 100 Million Learners initiative</span><small>Managed Anagha directly · October 16, 2026</small></figcaption></figure>`);
+}
 
 projectFilters.forEach((button) => {
   button.addEventListener("click", () => {

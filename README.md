@@ -1,6 +1,6 @@
 # Anagha Arun Bande — Professional Portfolio
 
-A responsive portfolio focused on operations, supply chain, analytics, and global strategy. The visual system uses an espresso-brown and gold palette, warm glass surfaces, a halo timeline, expandable evidence-based project studies, Anagha's portrait, cursor-reactive skills, undergraduate highlights, and concise faculty endorsements.
+A responsive professional portfolio focused on management, strategy, operations, business analytics, supply chain, consulting, finance, and global business. The visual system uses an espresso-brown and gold palette, warm glass surfaces, a halo timeline, expandable evidence-based project studies with repository links, Anagha's portrait, cursor-reactive skills, undergraduate highlights, and professional recommendations.
 
 The interface supports English, Hindi, French, Marathi, Spanish, Arabic, Portuguese, German, and Japanese. Arabic automatically uses a right-to-left layout, and the selected language is remembered locally.
 
