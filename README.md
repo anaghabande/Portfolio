@@ -14,7 +14,7 @@ Open `index.html` directly in a browser, or serve the directory with any static 
 - `styles.css` — design system, responsive layout, motion, and print styles
 - `script.js` — mobile navigation, localization, project filters, reveal effects, and the responsive skill-field canvas
 - `translations.js` — in-page translations and language-specific portfolio copy
-- `Gemini_Generated_Image_9l470t9l470t9l47.png` — portfolio portrait
+- `Anagha-Portfolio-Headshot-transparent.png` — transparent portfolio portrait
 - `.vercelignore` — keeps private source documents out of the public deployment
 
 The site uses Google Fonts for typography and otherwise has no packages, frameworks, plugins, or analytics.

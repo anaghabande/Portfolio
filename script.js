@@ -216,7 +216,7 @@ const cursorGlow = document.querySelector("[data-cursor-glow]");
 if (canvas) {
   const context = canvas.getContext("2d");
   const skillSets = {
-    en: ["OPERATIONS", "SUPPLY CHAIN", "ANALYTICS", "GLOBAL STRATEGY", "OPTIMIZATION", "QUALITY", "COMPLIANCE", "PROCUREMENT", "FORECASTING", "LEADERSHIP", "EXCEL", "POWER BI", "TABLEAU", "SPSS", "LINGO", "RESEARCH"],
+    en: ["OPERATIONS", "SUPPLY CHAIN", "ANALYTICS", "GLOBAL STRATEGY", "OPTIMIZATION", "QUALITY", "COMPLIANCE", "PROCUREMENT", "FORECASTING", "LEADERSHIP", "AGILE", "EXCEL", "POWER BI", "TABLEAU", "SPSS", "LINGO", "RESEARCH"],
     hi: ["संचालन", "आपूर्ति शृंखला", "विश्लेषण", "वैश्विक रणनीति", "अनुकूलन", "गुणवत्ता", "अनुपालन", "खरीद", "पूर्वानुमान", "नेतृत्व"],
     fr: ["OPÉRATIONS", "LOGISTIQUE", "ANALYSE", "STRATÉGIE", "OPTIMISATION", "QUALITÉ", "CONFORMITÉ", "ACHATS", "PRÉVISION", "LEADERSHIP"],
     mr: ["कार्यसंचालन", "पुरवठा साखळी", "विश्लेषण", "जागतिक धोरण", "ऑप्टिमायझेशन", "गुणवत्ता", "अनुपालन", "खरेदी", "अंदाज", "नेतृत्व"],
@@ -237,14 +237,14 @@ if (canvas) {
 
   const createFloatingSkills = () => {
     const source = skillSets[activeLanguage] || skillSets.en;
-    const count = viewportWidth < 700 ? Math.min(8, source.length) : Math.min(16, source.length);
+    const count = viewportWidth < 700 ? Math.min(8, source.length) : Math.min(18, source.length);
     floatingSkills = source.slice(0, count).map((label, index) => ({
       label,
       x: ((index * 0.618033 + 0.09) % 1) * viewportWidth,
       y: ((index * 0.381966 + 0.15) % 1) * viewportHeight,
-      vx: (Math.random() - 0.5) * 0.14,
-      vy: (Math.random() - 0.5) * 0.12,
-      size: 9 + (index % 4) * 1.4,
+      vx: (Math.random() - 0.5) * 0.24,
+      vy: (Math.random() - 0.5) * 0.2,
+      size: 11 + (index % 5) * 2.2,
       phase: Math.random() * Math.PI * 2,
     }));
   };
@@ -287,15 +287,15 @@ if (canvas) {
       const distance = Math.hypot(dx, dy);
       const proximity = pointer.active ? Math.max(0, 1 - distance / 200) : 0;
       if (animate) {
-        skill.vx += Math.sin(performance.now() * 0.00024 + skill.phase) * 0.0014;
-        skill.vy += Math.cos(performance.now() * 0.00021 + skill.phase) * 0.0011;
+        skill.vx += Math.sin(performance.now() * 0.00024 + skill.phase) * 0.002;
+        skill.vy += Math.cos(performance.now() * 0.00021 + skill.phase) * 0.0017;
         if (proximity > 0 && distance > 0) {
           const force = proximity * 0.07;
           skill.vx += (dx / distance) * force;
           skill.vy += (dy / distance) * force;
         }
-        skill.vx *= 0.985;
-        skill.vy *= 0.985;
+        skill.vx *= 0.99;
+        skill.vy *= 0.99;
         const speed = Math.hypot(skill.vx, skill.vy);
         if (speed > 1.25) { skill.vx = (skill.vx / speed) * 1.25; skill.vy = (skill.vy / speed) * 1.25; }
         skill.x += skill.vx;
@@ -306,7 +306,8 @@ if (canvas) {
         if (skill.y > viewportHeight + 35) skill.y = -20;
       }
       context.font = `600 ${skill.size}px Manrope, sans-serif`;
-      context.fillStyle = `rgba(237, 200, 115, ${0.045 + proximity * 0.24 + (index % 3) * 0.008})`;
+      const baseOpacity = viewportWidth < 700 ? 0.1 : 0.14;
+      context.fillStyle = `rgba(237, 200, 115, ${baseOpacity + proximity * 0.28 + (index % 4) * 0.025})`;
       context.shadowBlur = proximity * 18;
       context.shadowColor = "rgba(237, 200, 115, 0.5)";
       context.fillText(skill.label, skill.x, skill.y);
