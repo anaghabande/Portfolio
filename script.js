@@ -25,20 +25,6 @@ if (projectsSection && foundationHeading && foundationGrid && publicationCard) {
   projectsSection.insertAdjacentElement("afterend", foundationSection);
 }
 
-const skillsSection = document.querySelector("#skills");
-const endorsements = educationSection?.querySelector("#endorsements");
-if (skillsSection && endorsements) {
-  const recommendationSection = document.createElement("section");
-  recommendationSection.id = "recommendations";
-  recommendationSection.className = "section-pad section-warm standalone-subsection";
-  recommendationSection.setAttribute("aria-labelledby", "endorsements-title");
-  const recommendationShell = document.createElement("div");
-  recommendationShell.className = "page-shell";
-  recommendationShell.append(endorsements);
-  recommendationSection.append(recommendationShell);
-  skillsSection.insertAdjacentElement("afterend", recommendationSection);
-}
-
 const closeNavigation = () => {
   if (!nav || !navToggle) return;
   nav.classList.remove("is-open");
@@ -85,6 +71,67 @@ if (reduceMotion || !("IntersectionObserver" in window)) {
   revealItems.forEach((item) => revealObserver.observe(item));
 }
 
+const impactCounters = [...document.querySelectorAll("[data-counter-value]")];
+const counterFormatter = new Intl.NumberFormat("en-US");
+
+const showFinalCounterValue = (counter) => {
+  const value = Number(counter.dataset.counterValue);
+  const suffix = counter.dataset.counterSuffix || "";
+  counter.textContent = `${counterFormatter.format(value)}${suffix}`;
+  counter.classList.remove("is-counting");
+};
+
+const animateImpactCounter = (counter) => {
+  if (counter.dataset.animated === "true") return;
+  counter.dataset.animated = "true";
+
+  const target = Number(counter.dataset.counterValue);
+  const suffix = counter.dataset.counterSuffix || "";
+  const digitCeiling = (10 ** String(Math.round(target)).length) - 1;
+  const duration = 1250;
+  const start = performance.now();
+  let nextChange = 0;
+  counter.classList.add("is-counting");
+
+  const update = (now) => {
+    const progress = Math.min((now - start) / duration, 1);
+    if (progress >= 1) {
+      showFinalCounterValue(counter);
+      return;
+    }
+
+    if (now >= nextChange) {
+      let displayValue;
+      if (progress < 0.72) {
+        displayValue = Math.floor(Math.random() * (digitCeiling + 1));
+      } else {
+        const settle = (1 - progress) / 0.28;
+        const spread = Math.max(1, Math.round(digitCeiling * settle * 0.08));
+        displayValue = Math.max(0, target + Math.floor((Math.random() * 2 - 1) * spread));
+      }
+      counter.textContent = `${counterFormatter.format(displayValue)}${suffix}`;
+      nextChange = now + 42;
+    }
+
+    window.requestAnimationFrame(update);
+  };
+
+  window.requestAnimationFrame(update);
+};
+
+if (reduceMotion || !("IntersectionObserver" in window)) {
+  impactCounters.forEach(showFinalCounterValue);
+} else {
+  const counterObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      animateImpactCounter(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.45 });
+  impactCounters.forEach((counter) => counterObserver.observe(counter));
+}
+
 const observedSections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
@@ -122,8 +169,8 @@ const projectEnhancements = {
   "12": { categories: "marketing finance", repo: "https://github.com/anaghabande/global-marketing-data-visualization", skills: ["International marketing", "Pricing strategy", "Market analysis", "Tableau visualization"] },
 };
 
-projectCards.forEach((card) => {
-  const number = card.querySelector(".project-number")?.textContent.trim();
+projectCards.forEach((card, index) => {
+  const number = String(index + 1).padStart(2, "0");
   const enhancement = projectEnhancements[number];
   if (!enhancement) return;
   card.dataset.projectCategory = enhancement.categories;
@@ -180,6 +227,19 @@ const translations = window.portfolioTranslations || {};
 
 const getNestedValue = (object, path) => path.split(".").reduce((value, key) => value?.[key], object);
 
+const renderProjectTags = () => {
+  document.querySelectorAll(".project-type").forEach((type) => {
+    const source = type.dataset.i18n ? type.textContent : (type.dataset.tagSource || type.textContent);
+    if (!type.dataset.i18n) type.dataset.tagSource = source;
+    const tags = source.split(/\s*[·•]\s*/).filter(Boolean);
+    type.replaceChildren(...tags.map((tag) => {
+      const chip = document.createElement("span");
+      chip.textContent = tag;
+      return chip;
+    }));
+  });
+};
+
 const applyLanguage = (language) => {
   const dictionary = translations[language];
   translationNodes.forEach((node) => {
@@ -192,6 +252,7 @@ const applyLanguage = (language) => {
     const value = language === "en" ? originalAlt.get(key) : getNestedValue(dictionary, key);
     node.setAttribute("alt", value ?? originalAlt.get(key));
   });
+  renderProjectTags();
 
   document.documentElement.lang = language;
   document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
@@ -208,7 +269,7 @@ if (languageSelect) {
   if (![...languageSelect.options].some((option) => option.value === savedLanguage)) savedLanguage = "en";
   applyLanguage(savedLanguage);
   languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
-}
+} else renderProjectTags();
 
 const canvas = document.querySelector("#skill-canvas");
 const cursorGlow = document.querySelector("[data-cursor-glow]");
@@ -344,6 +405,76 @@ if (canvas) {
     if (reduceMotion) return;
     if (document.hidden && animationFrame) { window.cancelAnimationFrame(animationFrame); animationFrame = null; }
     else if (!document.hidden && !animationFrame) drawFrame(true);
+  });
+}
+
+const copyContactValue = async (value) => {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(value);
+    return;
+  }
+
+  const fallback = document.createElement("textarea");
+  fallback.value = value;
+  fallback.setAttribute("readonly", "");
+  fallback.style.position = "fixed";
+  fallback.style.opacity = "0";
+  document.body.append(fallback);
+  fallback.select();
+  document.execCommand("copy");
+  fallback.remove();
+};
+
+document.querySelectorAll("[data-copy-value]").forEach((button) => {
+  const initialLabel = button.getAttribute("aria-label") || "Copy contact detail";
+  button.addEventListener("click", async () => {
+    try {
+      await copyContactValue(button.dataset.copyValue);
+      button.classList.add("is-copied");
+      button.setAttribute("aria-label", "Copied");
+      window.setTimeout(() => {
+        button.classList.remove("is-copied");
+        button.setAttribute("aria-label", initialLabel);
+      }, 1800);
+    } catch {
+      button.setAttribute("aria-label", "Unable to copy");
+    }
+  });
+});
+
+const contactForm = document.querySelector("[data-contact-form]");
+if (contactForm) {
+  const formStatus = contactForm.querySelector("[data-contact-form-status]");
+  const submitButton = contactForm.querySelector("button[type='submit']");
+  contactForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!contactForm.reportValidity()) return;
+
+    const formData = new FormData(contactForm);
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.setAttribute("aria-busy", "true");
+    }
+    if (formStatus) formStatus.textContent = "Sending…";
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/abande25@asu.edu", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      });
+      const result = await response.json();
+      if (!response.ok || result.success === "false" || result.success === false) throw new Error("Submission failed");
+      contactForm.reset();
+      if (formStatus) formStatus.textContent = "Message sent. Thank you.";
+    } catch {
+      if (formStatus) formStatus.innerHTML = 'Message could not be sent. Please email <a href="mailto:abande25@asu.edu">abande25@asu.edu</a>.';
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.removeAttribute("aria-busy");
+      }
+    }
   });
 }
 

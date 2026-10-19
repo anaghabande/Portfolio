@@ -15,3 +15,9 @@ TGM 557/
 TGM 586/
 TGM 596/
 UDCT/
+
+# Local browser-test artifacts.
+.chrome-contact-*/
+contact-actual.png
+contact-desktop.png
+contact-mobile.png
